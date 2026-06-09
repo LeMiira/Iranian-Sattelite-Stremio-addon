@@ -24,31 +24,40 @@ export default defineEventHandler(async (event) => {
     const type = segments[0]; // 'channel', 'movie', 'series'
     const id = segments[1]; // channel ID or IMDb/TMDB ID
 
+    const host = event.node.req.headers.host || 'localhost:3000';
+    const protocol = (event.node.req.headers['x-forwarded-proto'] as string) || 'http';
+    const baseUrl = `${protocol}://${host}`;
+
     const streams: StremioStream[] = [];
 
     if (type === 'channel') {
       const allChannels = await iptvService.getAggregatedChannels();
       const ch = liveTvProvider.getChannelById(id);
       if (ch) {
+        // Helper to add direct & proxied stream options
+        const addStreamOptions = (titleName: string, targetUrl: string) => {
+          // Direct Stream (Best for Desktop / Mobile Apps)
+          streams.push({
+            title: `🎥 ${titleName} | Direct Server`,
+            url: targetUrl,
+            behaviorHints: { notWebReady: false }
+          });
+          
+          // Proxied Stream (Best for Browser players to bypass CORS / Mixed Content / PNA blocks)
+          streams.push({
+            title: `🛡️ ${titleName} | Web Proxy (CORS Bypass)`,
+            url: `${baseUrl}/proxy?url=${encodeURIComponent(targetUrl)}`,
+            behaviorHints: { notWebReady: false }
+          });
+        };
+
         // 1. Primary stream
-        streams.push({
-          title: `🎥 ${ch.name} | Server 1 (HLS/MP4)`,
-          url: ch.streamUrl,
-          behaviorHints: {
-            notWebReady: false,
-          }
-        });
+        addStreamOptions(ch.name, ch.streamUrl);
 
         // 2. Builtin backup streams
         if (ch.fallbackUrls && ch.fallbackUrls.length > 0) {
           ch.fallbackUrls.forEach((furl, idx) => {
-            streams.push({
-              title: `⚡ ${ch.name} | Backup Server ${idx + 1}`,
-              url: furl,
-              behaviorHints: {
-                notWebReady: false,
-              }
-            });
+            addStreamOptions(`${ch.name} (Backup ${idx + 1})`, furl);
           });
         }
 
@@ -68,13 +77,7 @@ export default defineEventHandler(async (event) => {
         });
 
         matchingIPTV.forEach((c, idx) => {
-          streams.push({
-            title: `🌐 IPTV Option ${idx + 1} (${c.category})`,
-            url: c.streamUrl,
-            behaviorHints: {
-              notWebReady: false,
-            }
-          });
+          addStreamOptions(`IPTV Mirror ${idx + 1} (${c.category})`, c.streamUrl);
         });
       }
     } else if (type === 'movie') {
