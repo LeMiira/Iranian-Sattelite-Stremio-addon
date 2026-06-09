@@ -67,3 +67,16 @@ Addons must be hosted on a public HTTPS domain.
     *   **Addon Details**: The submission portal automatically parses the addon name, description, categories, and catalogs from your manifest payload.
     *   **Markdown Description**: You can copy-paste the details from the repository `README.md` to show features (Persian TV, movies providers, and responsive IPTV aggregation dashboard).
 4.  Submit! Once submitted, it will be indexed and immediately discoverable under the Community Add-ons directory inside Stremio for all users globally.
+
+---
+
+## ⚠️ Important Note on Browser Player Testing (Stremio Web)
+
+If you are testing your addon using **Stremio Web** (`web.strem.io`) inside Chrome or Firefox:
+*   Standard browsers do not support native HLS `.m3u8` video playback.
+*   Stremio Web attempts to query the local engine at `http://127.0.0.1:11470` to process the stream, which triggers a **Local Network Access** security warning or blocks it with **OpaqueResponseBlocking (ORB)**.
+*   **To verify the stream plays properly**:
+    *   Test it in the **Stremio Desktop App** (which runs natively and has zero browser PNA/CORS blocks).
+    *   Or install the Chrome/Firefox extension **"Native HLS Playback"** to allow direct browser playing.
+    *   Or select the **`Web Proxy (CORS Bypass)`** stream option served by this addon, which proxies the HLS playlist chunks through your secure HTTPS domain.
+

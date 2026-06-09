@@ -58,6 +58,20 @@ docker-compose up -d --build
 
 ---
 
+## ⚠️ Troubleshooting Stremio Web (Browser Player)
+
+If you are playing streams inside the **Stremio Web App** (`web.strem.io`) on Chrome/Firefox instead of the **Stremio Desktop App**, you may encounter browser-level security blocks:
+
+1.  **Local Network Access / OpaqueResponseBlocking (ORB)**: Secure HTTPS sites (like `web.strem.io`) are blocked from communicating with local ports (`127.0.0.1:11470`) to check or stream HLS video manifests.
+2.  **Lack of Native HLS**: Windows/Linux browsers do not play `.m3u8` playlists natively, forcing Stremio Web to route queries to the local engine which triggers PNA blocks.
+
+### Resolution Steps:
+*   **Best Experience**: Use the official **Stremio Desktop App** or **Stremio Mobile/TV Apps**. They play HLS natively, bypass all browser PNA/CORS rules, and streams load instantly.
+*   **For Stremio Web Browser**: Install a browser extension like **"Native HLS Playback"** or **"Play HLS M3u8"** for Chrome/Firefox. This allows the browser to play `.m3u8` streams natively, disabling the local `127.0.0.1` engine request.
+*   **Select Proxy Server**: Select the **`Web Proxy (CORS Bypass)`** stream option in Stremio. This routes HLS chunks through your secure addon proxy domain to comply with browser CORS and HTTPS protocols.
+
+---
+
 ## 📚 Detailed Documentation
 
 *   [Architecture Design](file:///media/mira/Depo/miiiira/Iranian-Sattelite-Stremio-addon/docs/ARCHITECTURE.md)
