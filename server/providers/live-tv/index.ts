@@ -6,7 +6,7 @@ export const BUILTIN_CHANNELS: LiveChannel[] = [
     name: 'BBC Persian',
     logo: 'https://upload.wikimedia.org/wikipedia/commons/e/e1/BBC_Persian_logo.svg',
     category: 'News',
-    streamUrl: 'https://vs-cmaf-pushb-ww-live.akamaized.net/x=4/i=urn:bbc:pips:service:bbc_persian_tv/pc_hd_abr_v2.mpd',
+    streamUrl: 'https://vs-hls-pushb-ww-live.akamaized.net/x=4/i=urn:bbc:pips:service:bbc_persian_tv/pc_hd_abr_v2.m3u8',
     fallbackUrls: [
       'https://dev-live.livetvstream.co.uk/LS-63503-4/index.m3u8'
     ],
