@@ -11,28 +11,7 @@ export default defineEventHandler((event) => {
     description: 'Live Persian TV channels, movies & series, subtitles, and customizable IPTV playlist aggregation.',
     logo: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=256&h=256&q=80', // Premium visual placeholder
     types: ['channel', 'movie', 'series'],
-    resources: [
-      {
-        name: 'catalog',
-        types: ['channel', 'movie', 'series'],
-        prefixes: []
-      },
-      {
-        name: 'meta',
-        types: ['channel', 'movie', 'series'],
-        prefixes: ['iptv:', 'bbc-', 'iran-', 'irib-', 'pmc', 'gem-']
-      },
-      {
-        name: 'stream',
-        types: ['channel', 'movie', 'series'],
-        prefixes: ['iptv:', 'bbc-', 'iran-', 'irib-', 'pmc', 'gem-', 'tt']
-      },
-      {
-        name: 'subtitles',
-        types: ['movie', 'series'],
-        prefixes: ['tt']
-      }
-    ],
+    resources: ['catalog', 'meta', 'stream', 'subtitles'],
     catalogs: [
       {
         type: 'channel',
