@@ -39,7 +39,6 @@ export default defineNuxtConfig({
 
   // Nitro config
   nitro: {
-    preset: 'node-server',
     // We can specify route rules here if needed
   }
 })
