@@ -134,6 +134,7 @@ export interface LiveChannel {
   logo?: string;
   category: string; // e.g. "News", "Sports"
   streamUrl: string;
+  fallbackUrls?: string[];
   isCustom?: boolean; // True if loaded from M3U_URLS or CUSTOM_CHANNELS
   epgId?: string;
   status: 'online' | 'offline' | 'unknown';
