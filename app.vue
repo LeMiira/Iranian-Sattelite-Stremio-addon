@@ -163,7 +163,7 @@ function copyManifest() {
               <span>Cache Efficiency</span>
               <span class="tag">Cache</span>
             </div>
-            <div class="stat-value" v-slot:default v-if="store.stats">
+            <div class="stat-value" v-if="store.stats">
               {{ store.stats.cache.hits + store.stats.cache.misses > 0 
                 ? Math.round((store.stats.cache.hits / (store.stats.cache.hits + store.stats.cache.misses)) * 100) 
                 : 0 }}%
@@ -381,7 +381,7 @@ function copyManifest() {
       </div>
 
       <!-- TAB 3: INTEGRATION TESTING -->
-      <div v-slot:default v-if="activeTab === 'testing'" class="dashboard-layout fade-in">
+      <div v-if="activeTab === 'testing'" class="dashboard-layout fade-in">
         <!-- Search catalog tester -->
         <div class="glass-card">
           <h2 class="card-title">Catalog Query Tester</h2>
