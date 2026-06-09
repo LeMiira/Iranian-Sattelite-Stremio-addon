@@ -144,6 +144,36 @@ export const BUILTIN_CHANNELS: LiveChannel[] = [
     fallbackUrls: ['http://185.105.101.5:8081/gembollywood/index.m3u8'],
     epgId: 'GEMBollywood.ae',
     status: 'unknown',
+  },
+  {
+    id: 'mbc-persia',
+    name: 'MBC Persia',
+    logo: 'https://i.imgur.com/4FXiyjn.png',
+    category: 'Movies',
+    streamUrl: 'https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mbc-persia/818ee8e4b592dc497608f066d825bfb4/index.m3u8',
+    fallbackUrls: [],
+    epgId: 'MBCPersia.ae',
+    status: 'unknown',
+  },
+  {
+    id: 'four-u-tv',
+    name: '4U TV',
+    logo: 'https://i.imgur.com/PexhKwp.png',
+    category: 'Entertainment',
+    streamUrl: 'https://hls.4utv.live/hls/stream.m3u8',
+    fallbackUrls: [],
+    epgId: '4UTV.ir',
+    status: 'unknown',
+  },
+  {
+    id: 'irib-tv4',
+    name: 'IRIB TV 4',
+    logo: 'https://upload.wikimedia.org/wikipedia/commons/a/ad/IRIB_TV4_logo.svg',
+    category: 'General',
+    streamUrl: 'https://ncdn.telewebion.ir/tv4/live/playlist.m3u8',
+    fallbackUrls: ['http://live.telewebion.com/tv4/index.m3u8'],
+    epgId: 'IRIBTV4.ir',
+    status: 'unknown',
   }
 ];
 

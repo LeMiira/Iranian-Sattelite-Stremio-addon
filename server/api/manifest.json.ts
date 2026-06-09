@@ -9,7 +9,7 @@ export default defineEventHandler((event) => {
     version: '1.0.0',
     name: 'Persian Satellite & IPTV Addon',
     description: 'Live Persian TV channels, movies & series, subtitles, and customizable IPTV playlist aggregation.',
-    logo: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=256&h=256&q=80', // Premium visual placeholder
+    logo: 'https://iranian-sattelite-stremio-addon.vercel.app/thumb.png',
     types: ['channel', 'movie', 'series'],
     resources: ['catalog', 'meta', 'stream', 'subtitles'],
     catalogs: [
@@ -52,7 +52,7 @@ export default defineEventHandler((event) => {
         ]
       }
     ],
-    idPrefixes: ['iptv:', 'bbc-', 'iran-', 'irib-', 'pmc', 'gem-', 'tt'],
+    idPrefixes: ['iptv:', 'bbc-', 'iran-', 'irib-', 'pmc', 'gem-', 'tt', 'mbc-', 'four-'],
     behaviorHints: {
       configurable: true,
       configurationRequired: false
