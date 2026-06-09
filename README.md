@@ -1,5 +1,8 @@
 # Persian Satellite & IPTV Stremio Addon
 
+[![Buy Me A Coffee](https://img.shields.io/badge/Donate-Buy%20Me%20A%20Coffee-orange?style=flat-square&logo=buy-me-a-coffee)](https://buymeacoffee.com/miiiira)
+[![GitHub Repository](https://img.shields.io/badge/GitHub-Repository-blue?style=flat-square&logo=github)](https://github.com/LeMiira/Iranian-Sattelite-Stremio-addon)
+
 A production-ready Stremio addon built from scratch using Nuxt 3, TypeScript, Nitro, and Pinia. This addon aggregates Persian Live TV channels, compiles custom local/remote M3U IPTV playlists, supports movies and series stream scrapers, and manages subtitles, all controllable via a premium glassmorphic admin dashboard.
 
 ---
@@ -31,7 +34,7 @@ A production-ready Stremio addon built from scratch using Nuxt 3, TypeScript, Ni
 
 ```bash
 # Clone the repository
-git clone <repo-url>
+git clone https://github.com/LeMiira/Iranian-Sattelite-Stremio-addon.git
 cd Iranian-Sattelite-Stremio-addon
 
 # Install dependencies (without running postinstall scripts to bypass node version issues)
@@ -69,6 +72,14 @@ If you are playing streams inside the **Stremio Web App** (`web.strem.io`) on Ch
 *   **Best Experience**: Use the official **Stremio Desktop App** or **Stremio Mobile/TV Apps**. They play HLS natively, bypass all browser PNA/CORS rules, and streams load instantly.
 *   **For Stremio Web Browser**: Install a browser extension like **"Native HLS Playback"** or **"Play HLS M3u8"** for Chrome/Firefox. This allows the browser to play `.m3u8` streams natively, disabling the local `127.0.0.1` engine request.
 *   **Select Proxy Server**: Select the **`Web Proxy (CORS Bypass)`** stream option in Stremio. This routes HLS chunks through your secure addon proxy domain to comply with browser CORS and HTTPS protocols.
+
+---
+
+## 💖 Support & Donation
+
+If you find this addon useful, consider supporting development:
+
+*   **Buy Me a Coffee**: [buymeacoffee.com/miiiira](https://buymeacoffee.com/miiiira)
 
 ---
 

@@ -62,6 +62,20 @@ async function runStreamTest() {
   if (!testStreamId.value.trim()) return;
   await store.testStreamResource(testStreamType.value, testStreamId.value);
 }
+
+function getManifestUrl() {
+  if (typeof window !== 'undefined') {
+    return `${window.location.protocol}//${window.location.host}/manifest.json`;
+  }
+  return 'http://localhost:3000/manifest.json';
+}
+
+function copyManifest() {
+  const url = getManifestUrl();
+  navigator.clipboard.writeText(url)
+    .then(() => alert('Manifest URL copied to clipboard!'))
+    .catch(() => alert('Failed to copy. URL: ' + url));
+}
 </script>
 
 <template>
@@ -237,6 +251,55 @@ async function runStreamTest() {
             <div style="margin-top: 1.5rem; font-size: 0.85rem; color: var(--text-muted);">
               <p><strong>IPTV Refreshed:</strong> {{ store.stats?.iptvLastRefreshed || 'Never' }}</p>
               <p><strong>Cache Type:</strong> {{ store.stats?.cache?.type.toUpperCase() || 'MEMORY' }}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Addon Informational Cards -->
+        <div class="info-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 2.5rem;">
+          <div class="glass-card" style="display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <h3 class="card-title" style="margin-bottom: 0.75rem; color: var(--color-accent-blue);">
+                🚀 Quick Setup Guide
+              </h3>
+              <p style="font-size: 0.85rem; line-height: 1.5; color: var(--text-secondary); margin-bottom: 1rem;">
+                Copy the manifest URL below and paste it into Stremio's addon search bar to install this addon on any device.
+              </p>
+              <div style="background: rgba(0, 0, 0, 0.25); border: 1px solid var(--border-color); padding: 0.75rem; border-radius: 8px; font-family: monospace; font-size: 0.75rem; word-break: break-all; margin-bottom: 1rem; color: var(--color-accent-blue);">
+                {{ getManifestUrl() }}
+              </div>
+            </div>
+            <button class="btn btn-sm btn-primary" @click="copyManifest" style="width: 100%;">
+              Copy Manifest URL
+            </button>
+          </div>
+
+          <div class="glass-card">
+            <h3 class="card-title" style="margin-bottom: 0.75rem; color: var(--color-accent-purple);">
+              🛡️ Web Player Guide
+            </h3>
+            <p style="font-size: 0.85rem; line-height: 1.5; color: var(--text-secondary);">
+              Browser players (like Stremio Web) block HTTP localhost requests due to CORS and Private Network Access security rules. 
+              For seamless web playback, select the <strong>Web Proxy (CORS Bypass)</strong> stream, install a browser HLS extension, or use native desktop/mobile apps.
+            </p>
+          </div>
+
+          <div class="glass-card" style="display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <h3 class="card-title" style="margin-bottom: 0.75rem; color: var(--color-accent-pink);">
+                💖 Support & Repository
+              </h3>
+              <p style="font-size: 0.85rem; line-height: 1.5; color: var(--text-secondary); margin-bottom: 1.25rem;">
+                This addon is open-source and free to use. Visit our repository to report issues or check the code. Support the developer by donating below.
+              </p>
+            </div>
+            <div style="display: flex; gap: 0.75rem;">
+              <a href="https://github.com/LeMiira/Iranian-Sattelite-Stremio-addon" target="_blank" rel="noopener" class="btn btn-sm" style="flex: 1; text-decoration: none; text-align: center;">
+                📁 GitHub Repo
+              </a>
+              <a href="https://buymeacoffee.com/miiiira" target="_blank" rel="noopener" class="btn btn-sm btn-primary" style="flex: 1; text-decoration: none; text-align: center; background: linear-gradient(135deg, hsl(40, 85%, 55%), hsl(30, 85%, 50%)); border: none;">
+                ☕ Buy Me Coffee
+              </a>
             </div>
           </div>
         </div>

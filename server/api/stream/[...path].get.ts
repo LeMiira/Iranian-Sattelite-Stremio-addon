@@ -28,6 +28,10 @@ export default defineEventHandler(async (event) => {
     const protocol = (event.node.req.headers['x-forwarded-proto'] as string) || 'http';
     const baseUrl = `${protocol}://${host}`;
 
+    const origin = (event.node.req.headers.origin as string) || '';
+    const referer = (event.node.req.headers.referer as string) || '';
+    const isWebClient = origin.includes('strem.io') || referer.includes('strem.io');
+
     const streams: StremioStream[] = [];
 
     if (type === 'channel') {
@@ -36,19 +40,27 @@ export default defineEventHandler(async (event) => {
       if (ch) {
         // Helper to add direct & proxied stream options
         const addStreamOptions = (titleName: string, targetUrl: string) => {
-          // Direct Stream (Best for Desktop / Mobile Apps)
-          streams.push({
+          const directStream = {
             title: `🎥 ${titleName} | Direct Server`,
             url: targetUrl,
             behaviorHints: { notWebReady: false }
-          });
+          };
           
-          // Proxied Stream (Best for Browser players to bypass CORS / Mixed Content / PNA blocks)
-          streams.push({
+          const proxiedStream = {
             title: `🛡️ ${titleName} | Web Proxy (CORS Bypass)`,
             url: `${baseUrl}/proxy?url=${encodeURIComponent(targetUrl)}`,
             behaviorHints: { notWebReady: false }
-          });
+          };
+
+          if (isWebClient) {
+            // Web browser players need CORS bypass proxy by default
+            streams.push(proxiedStream);
+            streams.push(directStream);
+          } else {
+            // Desktop and Mobile players play direct stream natively (faster, saves server bandwidth)
+            streams.push(directStream);
+            streams.push(proxiedStream);
+          }
         };
 
         // 1. Primary stream
